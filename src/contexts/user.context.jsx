@@ -1,4 +1,5 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+/*
+import { createContext, useEffect, useReducer } from "react";
 import {
 	createUserDocumentFromAuth,
 	onAuthStateChangedListener,
@@ -31,7 +32,7 @@ const INITIAL_STATE = {
 };
 
 export const UserProvider = ({ children }) => {
-	//  const [currentUser, setCurrentUser] = useState(null);
+	 const [currentUser, setCurrentUser] = useState(null);
 	//  We are using useReducer now =>
 
 	// const [{currentUser},dispatch]  = useReducer(userReducer,INITIAL_STATE)
@@ -45,12 +46,12 @@ export const UserProvider = ({ children }) => {
 	// const value = {currentUser: currentUser,setCurrentUser:setCurrentUser};
 	const value = { currentUser, setCurrentUser };
 
-	//other way to see logged-in or logged out
+	// other way to see logged-in or logged out
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener(async (user) => {
 			if (user) {
 				await createUserDocumentFromAuth(user);
-				// console.log("doc ref", docref);
+				// console.log("doc ref", docRef);
 			}
 			setCurrentUser(user);
 			// console.log(user);
@@ -61,3 +62,4 @@ export const UserProvider = ({ children }) => {
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
+*/

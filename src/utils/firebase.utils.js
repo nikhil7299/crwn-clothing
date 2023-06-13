@@ -30,7 +30,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+// const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 //there can be multiple ways for a single sign-in method
@@ -63,12 +64,13 @@ export const getCategoriesAndDocuments = async () => {
 	const collectionRef = collection(db, "categories");
 	const q = query(collectionRef);
 	const querySnapshot = await getDocs(q);
-	const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-		const { title, items } = docSnapshot.data();
-		acc[title.toLowerCase()] = items;
-		return acc;
-	}, {});
-	return categoryMap;
+	return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+	// const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+	// 	const { title, items } = docSnapshot.data();
+	// 	acc[title.toLowerCase()] = items;
+	// 	return acc;
+	// }, {});
+	// return categoryMap;
 };
 
 export const createUserDocumentFromAuth = async (
@@ -79,12 +81,12 @@ export const createUserDocumentFromAuth = async (
 	const userDocRef = doc(db, "users", userAuth.uid);
 	//it returns userDocRefernce to setUserData - type=>
 	//fh {converter: null, _key: ht, type: 'document', firestore: vh}
-	console.log("user doc ref", userDocRef);
+	// console.log("user doc ref", userDocRef);
 
 	const userSnapshot = await getDoc(userDocRef);
 	// return user snapshot
 	//sf {_firestore: vh, _userDataWriter: hf, _key: ht, _document: null, _converter: null, …}
-	console.log("user snapshot", userSnapshot);
+	// console.log("user snapshot", userSnapshot);
 
 	console.log("user snapshot exists?", userSnapshot.exists()); //gives false as we didn't setUser data in the database
 
